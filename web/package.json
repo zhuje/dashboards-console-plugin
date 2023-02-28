@@ -1,6 +1,6 @@
 {
   "name": "dashboards-console-plugin",
-  "version": "0.0.1",
+  "requiredVersion": "0.0.1",
   "private": true,
   "repository": "git@github.com:jgbernalp/dashboards-console-plugin.git",
   "license": "Apache-2.0",
@@ -31,8 +31,8 @@
     "eslint-plugin-react": "^7.30.1",
     "prettier": "^2.7.1",
     "prettier-stylelint": "^0.4.2",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
+    "react": "18.1.0",
+    "react-dom": "18.1.0",
     "react-helmet": "^6.1.0",
     "react-i18next": "^11.8.11",
     "react-router": "5.2.0",
@@ -50,7 +50,7 @@
   },
   "consolePlugin": {
     "name": "dashboards-console-plugin",
-    "version": "0.0.1",
+    "requiredVersion": "0.0.1",
     "displayName": "Dashboards console plugin",
     "description": "Plugin to add proxy configurations from console to in-cluster services to populate dashboards",
     "exposedModules": {
@@ -63,6 +63,14 @@
     }
   },
   "dependencies": {
-    "lru-cache": "^7.14.1"
+    "lru-cache": "^7.14.1",
+    "@emotion/react": "11.9.0",
+    "@emotion/styled": "11.8.1",
+    "@mui/material": "5.8.0",
+    "@perses-dev/components": "0.4.1",
+    "lodash": "4.17.21",
+    "react": "18.1.0",
+    "react-dom": "18.1.0",
+    "react-scripts": "5.0.1"
   }
 }
