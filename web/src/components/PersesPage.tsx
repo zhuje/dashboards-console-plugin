@@ -3,7 +3,6 @@ import * as React from "react"
 import { useTheme } from '@mui/material';
 import { ChartsThemeProvider, EChartsTheme, generateChartsTheme, PersesChartsTheme, LineChart } from '@perses-dev/components';
 
-
 const mockData = [
     {
       metric: {
