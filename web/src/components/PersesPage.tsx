@@ -3,7 +3,7 @@ import { QueryParamProvider } from "use-query-params";
 import { WindowHistoryAdapter } from "use-query-params/adapters/window";
 import { dashboardSample } from './SampleData';
 import { useDatasourceApi } from './DataSourceAPI';
-import { ViewDashboard } from '@perses-dev/dashboards';
+import { ViewDashboard } from '../persesComponents/ViewDashboard';
 import { PersesDashboardProviders } from './PersesDashboardProvider';
 import { Box, createTheme, ThemeProvider } from '@mui/material';
 
