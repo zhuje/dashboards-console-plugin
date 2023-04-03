@@ -28,8 +28,6 @@ export function PanelContent(props: PanelContentProps) {
   const { data: plugin, isLoading } = usePlugin('Panel', panelPluginKind, { useErrorBoundary: true });
   const PanelComponent = plugin?.PanelComponent;
 
-  console.log("JZtest PanelComponent, ", JSON.stringify(PanelComponent))
-
   if (isLoading) {
     return (
       <Skeleton
@@ -45,5 +43,10 @@ export function PanelContent(props: PanelContentProps) {
     throw new Error(`Missing PanelComponent from panel plugin for kind '${panelPluginKind}'`);
   }
 
-  return  <PanelComponent {...others} contentDimensions={contentDimensions} />;
+  return (
+    <div>
+        <PanelComponent {...others} contentDimensions={contentDimensions} />
+    </div>
+  )
+  
 }

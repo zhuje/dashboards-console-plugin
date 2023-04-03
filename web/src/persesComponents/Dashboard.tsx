@@ -16,6 +16,13 @@ import { ErrorBoundary, ErrorAlert } from '@perses-dev/components';
 import { usePanelGroupIds } from '@perses-dev/dashboards';
 import { GridLayout } from './GridLayout';
 
+// TODO 
+export const EmptyDashboard = () =>  {
+    return (
+        <h1> TODO Empty Dashboard Placeholder </h1>
+    )
+}
+
 export type DashboardProps = BoxProps & {
   /**
    * Component that will be rendered when the dashboard is empty (i.e. has no
@@ -29,7 +36,7 @@ export type DashboardProps = BoxProps & {
 /**
  * Renders a Dashboard for the provided Dashboard spec.
  */
-export function Dashboard({...boxProps }: DashboardProps) {
+export function Dashboard({emptyDashboard = <EmptyDashboard />, ...boxProps }: DashboardProps) {
   const panelGroupIds = usePanelGroupIds();
   const isEmpty = !panelGroupIds.length;
 

@@ -22,10 +22,10 @@ import {
   DiscardChangesConfirmationDialog,
   DashboardToolbar,
   DeletePanelDialog,
-  DashboardProps,
 } from '@perses-dev/dashboards';
 import { useDashboard, useDiscardChangesConfirmationDialog, useEditMode } from '@perses-dev/dashboards';
-import { Dashboard } from "./Dashboard"
+import { Dashboard, DashboardProps} from "./Dashboard"
+
 
 export interface DashboardAppProps extends Pick<DashboardProps, 'emptyDashboard'> {
   dashboardResource: DashboardResource;
@@ -108,7 +108,7 @@ export const DashboardApp = (props) => {
       />
       <Box sx={{ padding: (theme) => theme.spacing(2), height: '100%' }}>
         <ErrorBoundary FallbackComponent={ErrorAlert}>
-          <Dashboard />
+          <Dashboard emptyDashboard={emptyDashboard}/>
         </ErrorBoundary>
         <PanelDrawer />
         <PanelGroupDialog />

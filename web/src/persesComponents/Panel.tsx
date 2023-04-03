@@ -20,6 +20,10 @@ import { Card, CardProps, CardContent } from '@mui/material';
 import { PanelHeader, PanelHeaderProps } from './PanelHeader';
 import { PanelContent } from './PanelContent';
 
+
+import { Card as PFCard , CardTitle, CardBody, CardFooter, Title, GalleryItem } from '@patternfly/react-core';
+
+
 export interface PanelProps extends CardProps<'section'> {
   definition: PanelDefinition;
   editHandlers?: PanelHeaderProps['editHandlers'];
@@ -64,59 +68,88 @@ export function Panel(props: PanelProps) {
   };
 
   return (
-    <Card
-      ref={ref}
-      component="section"
-      sx={combineSx(
-        {
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          flexFlow: 'column nowrap',
-        },
-        sx
-      )}
-      variant="outlined"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      aria-labelledby={headerId}
-      aria-describedby={headerId}
-      data-testid="panel"
-      {...others}
-    >
-      <PanelHeader
-        id={headerId}
-        title={definition.spec.display.name}
-        description={definition.spec.display.description}
-        editHandlers={editHandlers}
-        isHovered={isHovered}
-        sx={{ paddingX: `${chartsTheme.container.padding.default}px` }}
-      />
-      <CardContent
-        component="figure"
-        sx={{
-          position: 'relative',
-          overflow: 'hidden',
-          flexGrow: 1,
-          margin: 0,
-          padding: 0,
-          // Override MUI default style for last-child
-          ':last-child': {
-            padding: 0,
-          },
-        }}
-        ref={setContentElement}
-      >
-        <ErrorBoundary FallbackComponent={ErrorAlert} resetKeys={[definition.spec.plugin.spec]}>
-          {inView === true && (
-            <PanelContent
-              panelPluginKind={definition.spec.plugin.kind}
-              spec={definition.spec.plugin.spec}
-              contentDimensions={contentDimensions}
-            />
-          )}
-        </ErrorBoundary>
-      </CardContent>
-    </Card>
+//  <Card
+//         ref={ref}
+//         component="section"
+//         sx={combineSx(
+//           {
+//             width: '100%',
+//             height: '100%',
+//             display: 'flex',
+//             flexFlow: 'column nowrap',
+//           },
+//           sx
+//         )}
+//         variant="outlined"
+//         onMouseEnter={handleMouseEnter}
+//         onMouseLeave={handleMouseLeave}
+//         aria-labelledby={headerId}
+//         aria-describedby={headerId}
+//         data-testid="panel"
+//         {...others}
+//       >
+//         <PanelHeader
+//           id={headerId}
+//           title={definition.spec.display.name}
+//           description={definition.spec.display.description}
+//           editHandlers={editHandlers}
+//           isHovered={isHovered}
+//           sx={{ paddingX: `${chartsTheme.container.padding.default}px` }}
+//         />
+//         <CardContent
+//           component="figure"
+//           sx={{
+//             position: 'relative',
+//             overflow: 'hidden',
+//             flexGrow: 1,
+//             margin: 0,
+//             padding: 0,
+//             // Override MUI default style for last-child
+//             ':last-child': {
+//               padding: 0,
+//             },
+//           }}
+//           ref={setContentElement}
+//         >
+//           <ErrorBoundary FallbackComponent={ErrorAlert} resetKeys={[definition.spec.plugin.spec]}>
+//             {inView === true && (
+//               <PanelContent
+//                 panelPluginKind={definition.spec.plugin.kind}
+//                 spec={definition.spec.plugin.spec}
+//                 contentDimensions={contentDimensions}
+//               />
+//             )}
+//           </ErrorBoundary>
+//         </CardContent>
+//     </Card>  
+
+    
+      
+
+      <GalleryItem>
+        <PFCard id="utilization-card-4-card" component="div">
+          <CardTitle>
+            <Title headingLevel="h4" size="lg">
+              {definition.spec.display.name}
+            </Title>
+          </CardTitle>
+          <CardBody>
+            <ErrorBoundary FallbackComponent={ErrorAlert} resetKeys={[definition.spec.plugin.spec]}>
+              <PanelContent
+                      panelPluginKind={definition.spec.plugin.kind}
+                      spec={definition.spec.plugin.spec}
+                      contentDimensions={contentDimensions}
+                    />
+            </ErrorBoundary>
+          </CardBody>
+          <CardFooter>
+            <a href="#">See details</a>
+          </CardFooter>
+        </PFCard>
+    </GalleryItem>
+
+
+
+
   );
 }

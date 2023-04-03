@@ -19,6 +19,9 @@ import { GridTitle } from './GridTitle';
 import { GridItemContent } from './GridItemContent';
 import { GridContainer } from './GridContainer';
 
+import { Gallery } from '@patternfly/react-core';
+
+
 export const GRID_LAYOUT_COLS = { sm: 24, xxs: 2 } as const;
 export const GRID_LAYOUT_SMALL_BREAKPOINT = 'sm' as const;
 
@@ -51,42 +54,56 @@ export function GridLayout(props: GridLayoutProps) {
     }
   };
 
+
+
   return (
-    <GridContainer>
-      {groupDefinition.title !== undefined && (
-        <GridTitle
-          panelGroupId={panelGroupId}
-          title={groupDefinition.title}
-          collapse={
-            groupDefinition.isCollapsed === undefined
-              ? undefined
-              : { isOpen, onToggleOpen: () => setIsOpen((current) => !current) }
-          }
-        />
-      )}
-      <Collapse in={isOpen} unmountOnExit appear={false} data-testid="panel-group-content">
-        <ResponsiveGridLayout
-          className="layout"
-          breakpoints={{ sm: theme.breakpoints.values.sm, xxs: 0 }}
-          cols={GRID_LAYOUT_COLS}
-          rowHeight={30}
-          draggableHandle={'.drag-handle'}
-          resizeHandles={['se']}
-          isDraggable={isEditMode}
-          isResizable={isEditMode}
-          containerPadding={[0, 10]}
-          layouts={{ [GRID_LAYOUT_SMALL_BREAKPOINT]: groupDefinition.itemLayouts }}
-          onLayoutChange={handleLayoutChange}
-        >
-          {groupDefinition.itemLayouts.map(({ i }) => (
-            <div key={i}>
-              <ErrorBoundary FallbackComponent={ErrorAlert}>
-                <GridItemContent panelGroupItemId={{ panelGroupId, panelGroupItemLayoutId: i }} />
-              </ErrorBoundary>
-            </div>
-          ))}
-        </ResponsiveGridLayout>
-      </Collapse>
-    </GridContainer>
+    // <GridContainer>
+    //   {groupDefinition.title !== undefined && (
+    //     <GridTitle
+    //       panelGroupId={panelGroupId}
+    //       title={groupDefinition.title}
+    //       collapse={
+    //         groupDefinition.isCollapsed === undefined
+    //           ? undefined
+    //           : { isOpen, onToggleOpen: () => setIsOpen((current) => !current) }
+    //       }
+    //     />
+    //   )}
+    //   <Collapse in={isOpen} unmountOnExit appear={false} data-testid="panel-group-content">
+    //     <ResponsiveGridLayout
+    //       className="layout"
+    //       breakpoints={{ sm: theme.breakpoints.values.sm, xxs: 0 }}
+    //       cols={GRID_LAYOUT_COLS}
+    //       rowHeight={30}
+    //       draggableHandle={'.drag-handle'}
+    //       resizeHandles={['se']}
+    //       isDraggable={isEditMode}
+    //       isResizable={isEditMode}
+    //       containerPadding={[0, 10]}
+    //       layouts={{ [GRID_LAYOUT_SMALL_BREAKPOINT]: groupDefinition.itemLayouts }}
+    //       onLayoutChange={handleLayoutChange}
+    //     >
+    //       {groupDefinition.itemLayouts.map(({ i }) => (
+    //         <div key={i}>
+    //           <ErrorBoundary FallbackComponent={ErrorAlert}>
+    //             <GridItemContent panelGroupItemId={{ panelGroupId, panelGroupItemLayoutId: i }} />
+    //           </ErrorBoundary>
+    //         </div>
+    //       ))}
+    //     </ResponsiveGridLayout>
+    //    </Collapse>
+    // </GridContainer>
+
+    <Gallery hasGutter minWidths={{ default: '360px' }}>
+        {groupDefinition.itemLayouts.map(({ i }) => (
+                <div key={i}>
+                <ErrorBoundary FallbackComponent={ErrorAlert}>
+                    <GridItemContent panelGroupItemId={{ panelGroupId, panelGroupItemLayoutId: i }} />
+                </ErrorBoundary>
+                </div>
+            ))}
+    </Gallery>
+
+  
   );
 }
