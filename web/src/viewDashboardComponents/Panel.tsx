@@ -21,7 +21,7 @@ import { PanelHeader, PanelHeaderProps } from './PanelHeader';
 import { PanelContent } from './PanelContent';
 
 
-import { Card as PFCard , CardTitle, CardBody, CardFooter, Title, GalleryItem, CardActions } from '@patternfly/react-core';
+import { Card as PFCard , CardTitle, CardBody, CardFooter, Title, GalleryItem, CardHeader, CardActions } from '@patternfly/react-core';
 import { useTranslation } from 'react-i18next';
 import { Link, useParams } from 'react-router-dom';
 
@@ -169,11 +169,14 @@ export function Panel(props: PanelProps) {
 
       <GalleryItem>
         <PFCard id="utilization-card-4-card" component="div">
-          <CardTitle>
-            <Title headingLevel="h4" size="lg">
-              {definition.spec.display.name}                
-            </Title>
-          </CardTitle>
+        <CardHeader className="monitoring-dashboards__card-header">
+            <CardTitle>
+                {definition.spec.display.name}                
+            </CardTitle>
+            <CardActions className="co-overview-card__actions">
+              <QueryBrowserLink pluginSpec={definition.spec.plugin.spec} />
+            </CardActions>
+          </CardHeader>
           <CardBody>
             <ErrorBoundary FallbackComponent={ErrorAlert} resetKeys={[definition.spec.plugin.spec]}>
               <PanelContent
@@ -183,9 +186,6 @@ export function Panel(props: PanelProps) {
                     />
             </ErrorBoundary>
           </CardBody>
-          <CardFooter>
-            { <QueryBrowserLink pluginSpec={definition.spec.plugin.spec} />}
-          </CardFooter>
         </PFCard>
     </GalleryItem>
 
