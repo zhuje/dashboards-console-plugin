@@ -14,7 +14,6 @@
 import { ErrorBoundary, ErrorAlert } from '@perses-dev/components';
 import { PanelDefinition } from '@perses-dev/core';
 import { CardProps } from '@mui/material';
-import { PanelHeaderProps } from './PanelHeader';
 import { PanelContent } from './PanelContent';
 
 
@@ -25,7 +24,6 @@ import { Link } from 'react-router-dom';
 
 export interface PanelProps extends CardProps<'section'> {
   definition: PanelDefinition;
-  editHandlers?: PanelHeaderProps['editHandlers'];
 }
 
 /**

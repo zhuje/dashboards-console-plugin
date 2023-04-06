@@ -14,10 +14,7 @@
 import { ErrorAlert, ErrorBoundary } from '@perses-dev/components';
 import { usePanelGroup, PanelGroupId } from '@perses-dev/dashboards';
 import { GridItemContent } from './GridItemContent';
-
 import { Gallery } from '@patternfly/react-core';
-import { usePanel } from '@perses-dev/dashboards';
-
 
 export interface GridLayoutProps {
   panelGroupId: PanelGroupId;
@@ -40,7 +37,5 @@ export function GridLayout(props: GridLayoutProps) {
                 </div>
             ))}
     </Gallery>
-
-  
   );
 }
