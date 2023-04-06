@@ -11,8 +11,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import { PanelGroupItemId, useEditMode, usePanel, usePanelActions } from '@perses-dev/dashboards';
-import { Panel, PanelProps } from './Panel';
+import { PanelGroupItemId, usePanel } from '@perses-dev/dashboards';
+import { Panel } from './Panel';
 
 export interface GridItemContentProps {
   panelGroupItemId: PanelGroupItemId;
@@ -24,18 +24,6 @@ export interface GridItemContentProps {
 export function GridItemContent(props: GridItemContentProps) {
   const { panelGroupItemId } = props;
   const panelDefinition = usePanel(panelGroupItemId);
-  const { isEditMode } = useEditMode();
-  const { openEditPanel, openDeletePanelDialog, duplicatePanel } = usePanelActions(panelGroupItemId);
 
-  // Provide actions to the panel when in edit mode
-  let editHandlers: PanelProps['editHandlers'] = undefined;
-  if (isEditMode) {
-    editHandlers = {
-      onEditPanelClick: openEditPanel,
-      onDuplicatePanelClick: duplicatePanel,
-      onDeletePanelClick: openDeletePanelDialog,
-    };
-  }
-
-  return <Panel definition={panelDefinition} editHandlers={editHandlers} />;
+  return <Panel definition={panelDefinition} />;
 }

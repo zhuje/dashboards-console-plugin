@@ -92,16 +92,8 @@ export const DashboardApp = (props) => {
   };
 
   return (
-    <Box
-      sx={{
-        flexGrow: 1,
-        overflowX: 'hidden',
-        overflowY: 'auto',
-        display: 'flex',
-        flexDirection: 'column',
-      }}
-    >
-      {/* <DashboardToolbar
+    <div>
+      <DashboardToolbar
         dashboardName={dashboardResource.metadata.name}
         dashboardTitleComponent={dashboardTitleComponent}
         initialVariableIsSticky={initialVariableIsSticky}
@@ -109,60 +101,49 @@ export const DashboardApp = (props) => {
         isReadonly={isReadonly}
         onEditButtonClick={onEditButtonClick}
         onCancelButtonClick={onCancelButtonClick}
-      /> */}
-       <div className="co-m-nav-title co-m-nav-title--detail">
-          <div className="monitoring-dashboards__header">
-                <h1 className="co-m-pane__heading">
-                   Dashboards 
-                </h1>
-              <div className="monitoring-dashboards__options">
-                  <div className="form-group monitoring-dashboards__dropdown-wrap">
-                    <label htmlFor="monitoring-time-range-dropdown" className="monitoring-dashboards__dropdown-title">
-                      Time Range
-                    </label>
-                    <TimeRangeDropDown />
-                  </div>
-                  <div className="form-group monitoring-dashboards__dropdown-wrap">
-                    <label htmlFor="refresh-interval-dropdown" className="monitoring-dashboards__dropdown-title">
-                      Refresh interval
-                    </label>
-                    <IntervalRefreshDropDown />
-                  </div>
-               </div>
-            </div>
-            
-            <div className="monitoring-dashboards__variables">
-              <div className="monitoring-dashboards__dropdowns">
-
-                  <div className="form-group monitoring-dashboards__dropdown-wrap">
-                    <label htmlFor="dashboards-dropdown" className="monitoring-dashboards__dropdown-title">
-                          Dashboards
-                    </label>
-                    <DashboardsDropDown/>
-                  </div>
-                  <div className="form-group monitoring-dashboards__dropdown-wrap">
-                    <label htmlFor="dashboards-variable-dropdown" className="monitoring-dashboards__dropdown-title">
-                          Cluster
-                    </label>
-                    <ClusterDropDown/>
-                  </div>
-
+      />
+      <div className="co-m-nav-title co-m-nav-title--detail">
+        <div className="monitoring-dashboards__header">
+              <h1 className="co-m-pane__heading">
+                  Dashboards 
+              </h1>
+            <div className="monitoring-dashboards__options">
+                <div className="form-group monitoring-dashboards__dropdown-wrap">
+                  <label htmlFor="monitoring-time-range-dropdown" className="monitoring-dashboards__dropdown-title">
+                    Time Range
+                  </label>
+                  <TimeRangeDropDown />
                 </div>
-                
-            </div>
+                <div className="form-group monitoring-dashboards__dropdown-wrap">
+                  <label htmlFor="refresh-interval-dropdown" className="monitoring-dashboards__dropdown-title">
+                    Refresh interval
+                  </label>
+                  <IntervalRefreshDropDown />
+                </div>
+              </div>
           </div>
-     
-      
-        <div className="co-dashboard-body">
-        <ErrorBoundary FallbackComponent={ErrorAlert}>
-          <Dashboard emptyDashboard={emptyDashboard}/>
-        </ErrorBoundary>
-        <PanelDrawer />
-        <PanelGroupDialog />
-        <DeletePanelGroupDialog />
-        <DeletePanelDialog />
-        <DiscardChangesConfirmationDialog />
+          <div className="monitoring-dashboards__variables">
+            <div className="monitoring-dashboards__dropdowns">
+                <div className="form-group monitoring-dashboards__dropdown-wrap">
+                  <label htmlFor="dashboards-dropdown" className="monitoring-dashboards__dropdown-title">
+                        Dashboards
+                  </label>
+                  <DashboardsDropDown/>
+                </div>
+                <div className="form-group monitoring-dashboards__dropdown-wrap">
+                  <label htmlFor="dashboards-variable-dropdown" className="monitoring-dashboards__dropdown-title">
+                        Cluster
+                  </label>
+                  <ClusterDropDown/>
+                </div>
+              </div>
+          </div>
         </div>
-    </Box>
+        <div className="co-dashboard-body">
+          <ErrorBoundary FallbackComponent={ErrorAlert}>
+            <Dashboard emptyDashboard={emptyDashboard}/>
+          </ErrorBoundary>
+        </div>
+      </div>
   );
 };

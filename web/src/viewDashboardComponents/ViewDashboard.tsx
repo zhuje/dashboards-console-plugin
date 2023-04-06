@@ -11,8 +11,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import { Box, BoxProps } from '@mui/material';
-import { ErrorBoundary, ErrorAlert, combineSx } from '@perses-dev/components';
+import { BoxProps } from '@mui/material';
+import { ErrorBoundary, ErrorAlert } from '@perses-dev/components';
 import { TimeRangeProvider, useInitialTimeRange } from '@perses-dev/plugin-system';
 import {
   TemplateVariableProvider,
@@ -21,6 +21,7 @@ import {
   DatasourceStoreProvider,
 } from '@perses-dev/dashboards';
 import { DashboardApp, DashboardAppProps } from './DashboardApp';
+
 
 export interface ViewDashboardProps extends Omit<BoxProps, 'children'>, DashboardAppProps {
   datasourceApi: DatasourceStoreProviderProps['datasourceApi'];
@@ -41,8 +42,6 @@ export function ViewDashboard(props: ViewDashboardProps) {
     initialVariableIsSticky,
     isReadonly,
     isEditing,
-    sx,
-    ...others
   } = props;
   const { spec } = dashboardResource;
   const dashboardDuration = spec.duration ?? '1h';
@@ -53,19 +52,6 @@ export function ViewDashboard(props: ViewDashboardProps) {
       <DashboardProvider initialState={{ dashboardResource, isEditMode: !!isEditing }}>
         <TimeRangeProvider initialTimeRange={initialTimeRange} enabledURLParams={true}>
           <TemplateVariableProvider initialVariableDefinitions={spec.variables}>
-            <Box
-              sx={combineSx(
-                {
-                  display: 'flex',
-                  width: '100%',
-                  height: '100%',
-                  position: 'relative',
-                  overflow: 'hidden',
-                },
-                sx
-              )}
-              {...others}
-            >
               <ErrorBoundary FallbackComponent={ErrorAlert}>
                 <DashboardApp
                   dashboardResource={dashboardResource}
@@ -77,7 +63,6 @@ export function ViewDashboard(props: ViewDashboardProps) {
                   isReadonly={isReadonly}
                 />
               </ErrorBoundary>
-            </Box>
           </TemplateVariableProvider>
         </TimeRangeProvider>
       </DashboardProvider>

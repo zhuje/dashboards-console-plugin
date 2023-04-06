@@ -30,18 +30,6 @@ export function GridLayout(props: GridLayoutProps) {
   const { panelGroupId } = props;
   const groupDefinition = usePanelGroup(panelGroupId);
 
-//   const panels = groupDefinition.itemLayouts.map(({ i }) => (
-//     <div key={i}>
-//       <ErrorBoundary FallbackComponent={ErrorAlert}>
-//           <GridItemContent panelGroupItemId={{ panelGroupId, panelGroupItemLayoutId: i }} />
-//       </ErrorBoundary>
-//     </div>
-// ))
-  
-//   const panelDefinition = usePanel(panelGroupItemId);
-
-
-
   return (
     <Gallery hasGutter minWidths={{ default: '360px' }}>
         {groupDefinition.itemLayouts.map(({ i }) => (
