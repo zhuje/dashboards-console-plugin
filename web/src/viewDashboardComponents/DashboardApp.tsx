@@ -11,25 +11,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import { useState } from 'react';
-import { Box, Stack } from '@mui/material';
 import { ErrorAlert, ErrorBoundary } from '@perses-dev/components';
 import { DashboardResource } from '@perses-dev/core';
-import {
-  PanelDrawer,
-  PanelGroupDialog,
-  DeletePanelGroupDialog,
-  DiscardChangesConfirmationDialog,
-  DashboardToolbar,
-  DeletePanelDialog,
-} from '@perses-dev/dashboards';
-import { useDashboard, useDiscardChangesConfirmationDialog, useEditMode } from '@perses-dev/dashboards';
-import { Dashboard, DashboardProps} from "./Dashboard"
-
-import { IntervalRefreshDropDown } from "./dashboardHeader/IntervalRefreshDropDown"
+import { Dashboard, DashboardProps} from './Dashboard';
+import { IntervalRefreshDropDown } from './dashboardHeader/IntervalRefreshDropDown';
 import { TimeRangeDropDown } from './dashboardHeader/TimeRangeDropDown';
 import { DashboardsDropDown } from './dashboardHeader/DashboardsDropDown';
 import { ClusterDropDown } from './dashboardHeader/ClusterDropDown';
+
 
 export interface DashboardAppProps extends Pick<DashboardProps, 'emptyDashboard'> {
   dashboardResource: DashboardResource;
@@ -42,66 +31,10 @@ export interface DashboardAppProps extends Pick<DashboardProps, 'emptyDashboard'
 }
 
 export const DashboardApp = (props) => {
-  const {
-    dashboardResource,
-    dashboardTitleComponent,
-    emptyDashboard,
-    onSave,
-    onDiscard,
-    initialVariableIsSticky,
-    isReadonly,
-  } = props;
-  const { setEditMode } = useEditMode();
-  const { dashboard, setDashboard } = useDashboard();
-  const [originalDashboard, setOriginalDashboard] = useState<DashboardResource | undefined>(undefined);
-
-  const { openDiscardChangesConfirmationDialog, closeDiscardChangesConfirmationDialog } =
-    useDiscardChangesConfirmationDialog();
-
-  const handleDiscardChanges = () => {
-    // Reset to the original spec and exit edit mode
-    if (originalDashboard) {
-      setDashboard(originalDashboard);
-    }
-    setEditMode(false);
-    closeDiscardChangesConfirmationDialog();
-    if (onDiscard) {
-      onDiscard(dashboard);
-    }
-  };
-
-  const onEditButtonClick = () => {
-    setEditMode(true);
-    setOriginalDashboard(dashboard);
-  };
-
-  const onCancelButtonClick = () => {
-    // check if dashboard has been modified
-    if (JSON.stringify(dashboard) === JSON.stringify(originalDashboard)) {
-      setEditMode(false);
-    } else {
-      openDiscardChangesConfirmationDialog({
-        onDiscardChanges: () => {
-          handleDiscardChanges();
-        },
-        onCancel: () => {
-          closeDiscardChangesConfirmationDialog();
-        },
-      });
-    }
-  };
+  const { emptyDashboard } = props;
 
   return (
     <div>
-      <DashboardToolbar
-        dashboardName={dashboardResource.metadata.name}
-        dashboardTitleComponent={dashboardTitleComponent}
-        initialVariableIsSticky={initialVariableIsSticky}
-        onSave={onSave}
-        isReadonly={isReadonly}
-        onEditButtonClick={onEditButtonClick}
-        onCancelButtonClick={onCancelButtonClick}
-      />
       <div className="co-m-nav-title co-m-nav-title--detail">
         <div className="monitoring-dashboards__header">
               <h1 className="co-m-pane__heading">

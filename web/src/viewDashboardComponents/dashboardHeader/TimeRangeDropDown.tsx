@@ -1,39 +1,27 @@
-import React from 'react';
-import { Dropdown, DropdownToggle, DropdownItem } from '@patternfly/react-core';
+import { DateTimeRangePicker, TimeOption } from '@perses-dev/components';
+import { useTimeRange } from '@perses-dev/plugin-system';
 
 export function TimeRangeDropDown () {
-  const [isOpen, setIsOpen] = React.useState(false);
 
-  const onToggle = (isOpen: boolean) => {
-    setIsOpen(isOpen);
-  };
-
-  const onFocus = () => {
-    const element = document.getElementById('toggle-basic');
-    element.focus();
-  };
-
-  const onSelect = () => {
-    setIsOpen(false);
-    onFocus();
-  };
-
-  const dropdownItems = [
-    <DropdownItem key="link" tooltip="Tooltip for enabled link">
-      Last 30 seconds 
-    </DropdownItem>,
+  const TIME_OPTIONS: TimeOption[] = [
+    { value: { pastDuration: '5m' }, display: 'Last 5 minutes' },
+    { value: { pastDuration: '15m' }, display: 'Last 15 minutes' },
+    { value: { pastDuration: '30m' }, display: 'Last 30 minutes' },
+    { value: { pastDuration: '1h' }, display: 'Last 1 hour' },
+    { value: { pastDuration: '6h' }, display: 'Last 6 hours' },
+    { value: { pastDuration: '12h' }, display: 'Last 12 hours' },
+    { value: { pastDuration: '24h' }, display: 'Last 1 day' },
+    { value: { pastDuration: '7d' }, display: 'Last 7 days' },
+    { value: { pastDuration: '14d' }, display: 'Last 14 days' },
   ];
+  
+  const { timeRange, setTimeRange } = useTimeRange();
+  const DEFAULT_HEIGHT = '34px'; 
+  const height = DEFAULT_HEIGHT 
 
   return (
-    <Dropdown
-      onSelect={onSelect}
-      toggle={
-        <DropdownToggle id="toggle-basic" onToggle={onToggle}>
-          Last 30 seconds
-        </DropdownToggle>
-      }
-      isOpen={isOpen}
-      dropdownItems={dropdownItems}
-    />
+    <div>
+      <DateTimeRangePicker timeOptions={TIME_OPTIONS} value={timeRange} onChange={setTimeRange} height={height} />
+    </div>
   );
 };

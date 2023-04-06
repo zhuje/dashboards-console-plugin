@@ -20,7 +20,7 @@ export function IntervalRefreshDropDown () {
 
   const dropdownItems = [
     <DropdownItem key="link" tooltip="Tooltip for enabled link">
-      15 seconds
+      30 seconds
     </DropdownItem>,
   ];
 
@@ -29,7 +29,7 @@ export function IntervalRefreshDropDown () {
       onSelect={onSelect}
       toggle={
         <DropdownToggle id="toggle-basic" onToggle={onToggle}>
-          15 seconds
+          30 seconds
         </DropdownToggle>
       }
       isOpen={isOpen}

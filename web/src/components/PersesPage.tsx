@@ -19,16 +19,16 @@ const datasourceApi = useDatasourceApi();
 export default function PersesPage(){
     return (
       <QueryClientProvider client={queryClient}>
-          <QueryParamProvider adapter={WindowHistoryAdapter}>
-                  <PersesDashboardProviders>
-                      <ViewDashboard
-                      dashboardResource={dashboardSample}
-                      datasourceApi={datasourceApi}
-                      initialVariableIsSticky={false}
-                      isReadonly={true}
-                      />
-                  </PersesDashboardProviders>
-          </QueryParamProvider>
+        <QueryParamProvider adapter={WindowHistoryAdapter}>
+            <PersesDashboardProviders>
+                <ViewDashboard
+                dashboardResource={dashboardSample}
+                datasourceApi={datasourceApi}
+                initialVariableIsSticky={false}
+                isReadonly={true}
+                />
+            </PersesDashboardProviders>
+        </QueryParamProvider>
       </QueryClientProvider>
     )
 }
