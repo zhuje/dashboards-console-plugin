@@ -10,22 +10,12 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-import { useState } from 'react';
-import { Responsive, WidthProvider, Layouts, Layout } from 'react-grid-layout';
-import { Collapse, useTheme } from '@mui/material';
+
 import { ErrorAlert, ErrorBoundary } from '@perses-dev/components';
-import { useEditMode, usePanelGroup, usePanelGroupActions, PanelGroupId } from '@perses-dev/dashboards';
-import { GridTitle } from './GridTitle';
+import { usePanelGroup, PanelGroupId } from '@perses-dev/dashboards';
 import { GridItemContent } from './GridItemContent';
-import { GridContainer } from './GridContainer';
 
 import { Gallery } from '@patternfly/react-core';
-
-
-export const GRID_LAYOUT_COLS = { sm: 24, xxs: 2 } as const;
-export const GRID_LAYOUT_SMALL_BREAKPOINT = 'sm' as const;
-
-const ResponsiveGridLayout = WidthProvider(Responsive);
 
 export interface GridLayoutProps {
   panelGroupId: PanelGroupId;
@@ -35,65 +25,10 @@ export interface GridLayoutProps {
  * Layout component that arranges children in a Grid based on the definition.
  */
 export function GridLayout(props: GridLayoutProps) {
-  const { panelGroupId /*...others */ } = props;
-  const theme = useTheme();
+  const { panelGroupId } = props;
   const groupDefinition = usePanelGroup(panelGroupId);
-  const { updatePanelGroupLayouts } = usePanelGroupActions(panelGroupId);
-
-  const [isOpen, setIsOpen] = useState(!groupDefinition.isCollapsed ?? true);
-  const { isEditMode } = useEditMode();
-
-  const handleLayoutChange = (currentLayout: Layout[], allLayouts: Layouts) => {
-    // Using the value from `allLayouts` instead of `currentLayout` because of
-    // a bug in react-layout-grid where `currentLayout` does not adjust properly
-    // when going to a smaller breakpoint and then back to a larger breakpoint.
-    // https://github.com/react-grid-layout/react-grid-layout/issues/1663
-    const smallLayout = allLayouts[GRID_LAYOUT_SMALL_BREAKPOINT];
-    if (smallLayout) {
-      updatePanelGroupLayouts(smallLayout);
-    }
-  };
-
-
 
   return (
-    // <GridContainer>
-    //   {groupDefinition.title !== undefined && (
-    //     <GridTitle
-    //       panelGroupId={panelGroupId}
-    //       title={groupDefinition.title}
-    //       collapse={
-    //         groupDefinition.isCollapsed === undefined
-    //           ? undefined
-    //           : { isOpen, onToggleOpen: () => setIsOpen((current) => !current) }
-    //       }
-    //     />
-    //   )}
-    //   <Collapse in={isOpen} unmountOnExit appear={false} data-testid="panel-group-content">
-    //     <ResponsiveGridLayout
-    //       className="layout"
-    //       breakpoints={{ sm: theme.breakpoints.values.sm, xxs: 0 }}
-    //       cols={GRID_LAYOUT_COLS}
-    //       rowHeight={30}
-    //       draggableHandle={'.drag-handle'}
-    //       resizeHandles={['se']}
-    //       isDraggable={isEditMode}
-    //       isResizable={isEditMode}
-    //       containerPadding={[0, 10]}
-    //       layouts={{ [GRID_LAYOUT_SMALL_BREAKPOINT]: groupDefinition.itemLayouts }}
-    //       onLayoutChange={handleLayoutChange}
-    //     >
-    //       {groupDefinition.itemLayouts.map(({ i }) => (
-    //         <div key={i}>
-    //           <ErrorBoundary FallbackComponent={ErrorAlert}>
-    //             <GridItemContent panelGroupItemId={{ panelGroupId, panelGroupItemLayoutId: i }} />
-    //           </ErrorBoundary>
-    //         </div>
-    //       ))}
-    //     </ResponsiveGridLayout>
-    //    </Collapse>
-    // </GridContainer>
-
     <Gallery hasGutter minWidths={{ default: '360px' }}>
         {groupDefinition.itemLayouts.map(({ i }) => (
                 <div key={i}>
