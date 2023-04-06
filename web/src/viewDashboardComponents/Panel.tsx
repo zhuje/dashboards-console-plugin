@@ -11,8 +11,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import { useState, useMemo } from 'react';
-import { ErrorBoundary, ErrorAlert, combineSx, useId, useChartsTheme } from '@perses-dev/components';
+import { ErrorBoundary, ErrorAlert } from '@perses-dev/components';
 import { PanelDefinition } from '@perses-dev/core';
 import { CardProps } from '@mui/material';
 import { PanelHeaderProps } from './PanelHeader';
